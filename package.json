@@ -1,0 +1,36 @@
+{
+  "name": "bywrit",
+  "version": "0.1.0",
+  "description": "CLI for AI agents to interact with ByWrit — search providers, create accounts, manage identity",
+  "type": "module",
+  "license": "Apache-2.0",
+  "bin": {
+    "bywrit": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "bywrit",
+    "oidc",
+    "identity",
+    "ai-agent",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bywrit/cli"
+  }
+}
