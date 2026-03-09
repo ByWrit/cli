@@ -104,13 +104,15 @@ export async function providerInfoCommand(args: string[]) {
 			return;
 		}
 
-		info(`Name:        ${provider.name}`);
-		info(`Slug:        ${provider.slug}`);
-		info(`Category:    ${provider.category || '—'}`);
-		info(`Website:     ${provider.website_url || '—'}`);
-		info(`Scopes:      ${provider.scopes.join(', ')}`);
+		info(`Name:               ${provider.name}`);
+		info(`Slug:               ${provider.slug}`);
+		info(`Category:           ${provider.category || '-'}`);
+		info(`Website:            ${provider.website_url || '-'}`);
+		info(`Scopes:             ${provider.scopes.join(', ')}`);
+		info(`Initiate URL:       ${provider.initiate_login_uri || '-'}`);
+		info(`Agent Initiate URL: ${provider.agent_initiate_login_uri || '-'}`);
 		if (provider.description) {
-			info(`Description: ${provider.description}`);
+			info(`Description:        ${provider.description}`);
 		}
 	} catch (err) {
 		if (err instanceof ApiError && err.status === 404) {

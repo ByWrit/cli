@@ -51,6 +51,7 @@ export function getProfile() {
 }
 
 export type Provider = {
+	id?: string;
 	slug: string;
 	name: string;
 	description: string | null;
@@ -59,9 +60,12 @@ export type Provider = {
 };
 
 export type ProviderDetail = Provider & {
+	id?: string;
 	client_id: string;
 	redirect_uris: string[];
 	scopes: string[];
+	initiate_login_uri?: string | null;
+	agent_initiate_login_uri?: string | null;
 	created_at: number;
 };
 
@@ -75,6 +79,56 @@ export function listProviders(category?: string, search?: string) {
 
 export function getProvider(slug: string) {
 	return request<ProviderDetail>(`/v1/providers/${slug}`);
+}
+
+export type AgentSession = {
+	session_token: string;
+	token_type: 'Session';
+	expires_in: number;
+};
+
+export function createAgentSession() {
+	return request<AgentSession>('/v1/agent/session', {
+		method: 'POST',
+	});
+}
+
+export type SignupAttempt = {
+	id: string;
+	status:
+		| 'completed'
+		| 'already_exists'
+		| 'browser_required'
+		| 'additional_input_required'
+		| 'provider_unavailable'
+		| 'unsupported_by_provider'
+		| 'failed'
+		| 'in_progress';
+	provider: {
+		id: string;
+		slug: string;
+		name: string;
+	};
+	used_login_uri: string | null;
+	http_status: number | null;
+	final_url: string | null;
+	error_code: string | null;
+	error_message: string | null;
+	result: Record<string, unknown> | null;
+	created_at: number;
+	updated_at: number;
+	completed_at: number | null;
+};
+
+export function createManagedSignup(provider: string) {
+	return request<SignupAttempt>('/v1/agent/signups', {
+		method: 'POST',
+		body: JSON.stringify({ provider }),
+	});
+}
+
+export function getManagedSignup(attemptId: string) {
+	return request<SignupAttempt>(`/v1/agent/signups/${encodeURIComponent(attemptId)}`);
 }
 
 export type Grant = {

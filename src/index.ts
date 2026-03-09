@@ -32,7 +32,7 @@ Usage:
   bywrit providers search <query>      Search providers by category or keyword
   bywrit providers info <slug>         Show provider details
 
-  bywrit signup <provider>             Create account via headless OIDC
+  bywrit signup <provider>             Create account via managed ByWrit signup
   bywrit status [provider]             Check account status
 
 Options:
@@ -42,7 +42,7 @@ Options:
 Get started:
   1. Create an account at app.bywrit.com and generate an agent token
   2. Run: bywrit login
-  3. Run: bywrit providers search <category>
+  3. Run: bywrit providers search <query>     # e.g. auth, database, email, resend
 `;
 
 async function main() {
